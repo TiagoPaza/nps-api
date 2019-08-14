@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::prefix('v1')->group(function () {
+    Route::prefix((function () {
+        $locale = request()->segment(3);
+        return LaravelLocalization::setLocale($locale);
+    })())->group(function () {
+        Route::post('login', 'AuthController@login');
+
+        Route::group(['middleware' => 'auth.jwt'], function () {
+            Route::get('logout', 'AuthController@logout');
+            Route::get('user', 'UserController@authenticated');
+
+            Route::resource('users', 'UserController');
+        });
+    });
 });
