@@ -6,12 +6,21 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\JWTAuth;
 
 class AuthController extends Controller
 {
     protected $title;
     protected $detail;
+
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
 
     /**
      * Get a JWT via given credentials.
@@ -24,7 +33,7 @@ class AuthController extends Controller
         $input = $request->only('email', 'password');
         $jwt_token = null;
 
-        if (!$jwt_token = JWTAuth::attempt($input)) {
+        if (!$jwt_token = auth()->attempt($input)) {
             if (request()->route()->getPrefix() === 'api/v1/en') {
                 $this->title = 'Unauthorized.';
                 $this->detail = 'Invalid email/password or not seted in your header "Content-Type: application/json"';
@@ -80,22 +89,30 @@ class AuthController extends Controller
         ]);
 
         try {
-            JWTAuth::invalidate($request->token);
+            auth()->logout();
+
+            if (request()->route()->getPrefix() === 'api/v1/en') {
+                $this->title = 'Logged out.';
+                $this->detail = 'Success! You are disconnected.';
+            } else {
+                $this->title = 'Desconectado.';
+                $this->detail = 'Sucesso! Você foi desconectado.';
+            }
 
             return response()->json([
                 'data' => [
-                    'type' => 'logout'
+                    'type' => $this->title
                 ],
                 'attributes' => [
-                    'description' => 'User logged out successfully!'
+                    'description' => $this->detail
                 ]
             ]);
         } catch (JWTException $exception) {
             return response()->json([
                 'errors' => [
                     'code' => 500,
-                    'title' => 'Disconnected.',
-                    'description' => 'Sorry, the user cannot be logged out!'
+                    'title' => 'Error on disconnect.',
+                    'description' => $exception->getMessage()
                 ]
             ], 500);
         }
