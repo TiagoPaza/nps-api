@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
@@ -12,15 +13,15 @@ class AuthController extends Controller
     protected $title;
     protected $detail;
 
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login']]);
-    }
+//    /**
+//     * Create a new AuthController instance.
+//     *
+//     * @return void
+//     */
+//    public function __construct()
+//    {
+//        $this->middleware('auth:api', ['except' => ['login']]);
+//    }
 
     /**
      * Get a JWT via given credentials.
@@ -48,7 +49,7 @@ class AuthController extends Controller
                 'detail' => $this->detail
             ];
 
-            return response()->json(['errors' => $errors], 401);
+            return response()->json(['errors' => $errors], Response::HTTP_UNAUTHORIZED);
         }
 
         return $this->respondWithToken($jwt_token);
@@ -114,7 +115,7 @@ class AuthController extends Controller
                     'title' => 'Error on disconnect.',
                     'description' => $exception->getMessage()
                 ]
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -2,12 +2,41 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+/**
+ * App\User
+ *
+ * @property int $id
+ * @property string $social_reason
+ * @property string $fantasy_name
+ * @property string $document
+ * @property string $document_type
+ * @property string $state_registration
+ * @property string $email
+ * @property string $phone
+ * @property string $cep
+ * @property string $address
+ * @property string $number
+ * @property string $complement
+ * @property string $state
+ * @property string $city
+ * @property string $country
+ * @property Carbon|null $email_verified_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @mixin Eloquent
+ */
+class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable, HasRoles, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +44,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'social_reason', 'fantasy_name', 'document',
+        'document_type', 'state_registration', 'email',
+        'phone', 'cep', 'address',
+        'number', 'complement', 'password',
+        'state', 'city', 'country'
     ];
 
     /**
@@ -27,12 +60,32 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dates = ['deleted_at'];
+
     /**
-     * The attributes that should be cast to native types.
+     * Get the identifier that will be stored in the subject claim of the JWT.
      *
-     * @var array
+     * @return mixed
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        if (!empty($password)) {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
 }

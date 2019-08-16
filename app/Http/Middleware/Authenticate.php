@@ -2,21 +2,61 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
+use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class Authenticate extends Middleware
+class Authenticate
 {
+    protected $title;
+    protected $detail;
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * The authentication guard factory instance.
+     *
+     * @var Auth
+     */
+    protected $auth;
+
+    /**
+     * Create a new middleware instance.
+     *
+     * @param Auth $auth
+     * @return void
+     */
+    public function __construct(Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
+    /**
+     * Handle an incoming request.
      *
      * @param Request $request
-     * @return string
+     * @param Closure $next
+     * @param string|null $guard
+     * @return mixed
      */
-    protected function redirectTo($request)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if (!$request->expectsJson()) {
-            return route('login');
+        if ($this->auth->guard($guard)->guest()) {
+            if (request()->route()->getPrefix() === 'api/v1/en') {
+                $this->title = 'Unauthorized.';
+                $this->detail = 'You are disconnected! Your token are expired or is invalid, please re-login to validade your account!';
+            } else {
+                $this->title = 'Sem autorização.';
+                $this->detail = 'Você foi desconectado! O seu token expirou ou é inválido, por favor re-logue para validar a sua conta!';
+            }
+
+            return response()->json([
+                'errors' => [
+                    'code' => 401,
+                    'title' => $this->title,
+                    'detail' => $this->detail
+                ]
+            ], Response::HTTP_UNAUTHORIZED);
         }
+
+        return $next($request);
     }
 }
