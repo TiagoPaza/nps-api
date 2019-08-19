@@ -95,6 +95,9 @@ class UserController extends Controller
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function authenticated()
     {
         if (auth()->user()) {

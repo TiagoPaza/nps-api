@@ -16,8 +16,18 @@ class CreatePlansActivitiesTable extends Migration
         Schema::create('plans_activities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('questions_current');
+            $table->bigInteger('plan_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
 
             $table->timestamps();
+        });
+
+        Schema::table('plans_activities', function (Blueprint $table) {
+            $table->foreign('plan_id')->references('id')
+                ->on('plans');
+
+            $table->foreign('user_id')->references('id')
+                ->on('users');
         });
     }
 

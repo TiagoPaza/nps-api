@@ -24,6 +24,11 @@ class CreateQuestionsTable extends Migration
 
             $table->softDeletes();
         });
+
+        Schema::table('questions', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')
+                ->on('users');
+        });
     }
 
     /**

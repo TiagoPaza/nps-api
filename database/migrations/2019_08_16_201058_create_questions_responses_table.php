@@ -17,9 +17,14 @@ class CreateQuestionsResponsesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('evaluation');
             $table->string('response_optional');
-            $table->bigInteger('answer_id');
+            $table->bigInteger('question_id')->unsigned();
 
             $table->timestamps();
+        });
+
+        Schema::table('questions_responses', function (Blueprint $table) {
+            $table->foreign('question_id')->references('id')
+                ->on('questions');
         });
     }
 
