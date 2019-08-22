@@ -3,7 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
-use Eloquent;
+use Illuminate\Database\Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -32,7 +32,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @mixin Eloquent
+ * @mixin Eloquent\Model
  */
 class User extends Authenticatable implements JWTSubject
 {

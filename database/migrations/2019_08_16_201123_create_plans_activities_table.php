@@ -27,7 +27,7 @@ class CreatePlansActivitiesTable extends Migration
                 ->on('plans');
 
             $table->foreign('user_id')->references('id')
-                ->on('users');
+                ->on('users')->onDelete('cascade');
         });
     }
 
