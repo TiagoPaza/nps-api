@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\User;
 
-class UserUpdateRequest extends UserRequest
+use App\Http\Requests\JsonRequest;
+
+class UserUpdateRequest extends JsonRequest
 {
     /**
      * Get the validation rules that apply to the request.

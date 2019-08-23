@@ -14,7 +14,6 @@ class UserTransformer extends TransformerAbstract
             'social_reason' => $user->social_reason,
             'fantasy_name' => $user->fantasy_name,
             'document' => $user->document,
-            'document_type' => $user->document_type,
             'state_registration' => $user->state_registration,
             'email' => $user->email,
             'phone' => $user->phone,
