@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $ask_optional
  * @property-read User $user
  * @property Carbon|null $expire_at
+ * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @mixin Eloquent\Model

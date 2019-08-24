@@ -17,7 +17,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $social_reason
  * @property string $fantasy_name
  * @property string $document
- * @property string $document_type
  * @property string $state_registration
  * @property string $email
  * @property string $phone
@@ -45,7 +44,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'social_reason', 'fantasy_name', 'document',
-        'document_type', 'state_registration', 'email',
+        'state_registration', 'email',
         'phone', 'cep', 'address',
         'number', 'complement', 'password',
         'state', 'city', 'country'

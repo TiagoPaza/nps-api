@@ -8,18 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\QuestionResponse
+ * App\QuestionReply
  *
  * @property int $id
  * @property string $evaluation
  * @property string $response_optional
  * @property int $question_id
  * @property-read Question $question
+ * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @mixin Eloquent\Model
  */
-class QuestionResponse extends Model
+class QuestionReply extends Model
 {
     use SoftDeletes;
 

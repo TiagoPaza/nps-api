@@ -7,7 +7,6 @@ use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Responses\UserCollectionResponse;
 use App\Http\Responses\UserResponse;
 use App\User;
-use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
