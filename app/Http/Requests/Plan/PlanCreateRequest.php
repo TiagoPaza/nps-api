@@ -13,8 +13,11 @@ class PlanCreateRequest extends JsonRequest
      */
     public function rules()
     {
-        return [
+        $id = $this->json('id') ? ',' . $this->json('id') : '';
 
+        return [
+            'name' => 'required|string|unique:plan' . $id,
+            'questions_limit' => 'required|integer'
         ];
     }
 }

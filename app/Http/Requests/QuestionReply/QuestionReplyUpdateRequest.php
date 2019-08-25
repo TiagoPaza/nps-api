@@ -4,7 +4,7 @@ namespace App\Http\Requests\PlanActivity;
 
 use App\Http\Requests\JsonRequest;
 
-class QuestionResponseUpdateRequest extends JsonRequest
+class QuestionReplyUpdateRequest extends JsonRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +14,8 @@ class QuestionResponseUpdateRequest extends JsonRequest
     public function rules()
     {
         return [
-
+            'evaluation' => 'integer',
+            'response_optional' => 'string'
         ];
     }
 }

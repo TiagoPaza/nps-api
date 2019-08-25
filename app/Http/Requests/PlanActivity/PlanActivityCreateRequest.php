@@ -14,7 +14,9 @@ class PlanActivityCreateRequest extends JsonRequest
     public function rules()
     {
         return [
-
+            'questions_current' => 'required|integer',
+            'plan_id' => 'required|integer|exists:plans,id',
+            'user_id' => 'required|integer|exists:users,id'
         ];
     }
 }

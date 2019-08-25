@@ -14,7 +14,9 @@ class QuestionCreateRequest extends JsonRequest
     public function rules()
     {
         return [
-
+            'ask' => 'required|string',
+            'ask_optional' => 'required|string',
+            'user_id' => 'required|integer:exists:users,id'
         ];
     }
 }

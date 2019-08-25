@@ -14,7 +14,9 @@ class QuestionUpdateRequest extends JsonRequest
     public function rules()
     {
         return [
-
+            'ask' => 'string',
+            'ask_optional' => 'string',
+            'user_id' => 'integer|exists:users,id'
         ];
     }
 }
