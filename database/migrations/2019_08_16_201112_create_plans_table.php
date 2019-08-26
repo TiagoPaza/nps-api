@@ -19,6 +19,7 @@ class CreatePlansTable extends Migration
             $table->integer('questions_limit');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

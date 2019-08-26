@@ -25,6 +25,11 @@ class PlanActivity extends Model
 {
     use SoftDeletes;
 
+    /*
+     * The name of table
+     */
+    protected $table = 'plans_activities';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -48,7 +53,7 @@ class PlanActivity extends Model
     ];
 
     /*
-     * Function to relation which model
+     * Function to relate model
      */
     public function plan()
     {
@@ -56,7 +61,7 @@ class PlanActivity extends Model
     }
 
     /*
-     * Function to relation which model
+     * Function to relate model
      */
     public function user()
     {

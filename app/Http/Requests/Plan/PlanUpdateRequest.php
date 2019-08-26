@@ -16,7 +16,7 @@ class PlanUpdateRequest extends JsonRequest
         $id = $this->request->get('id') ? ',' . $this->request->get('id') : '';
 
         return [
-            'name' => 'string|unique:plan,id' . $id,
+            'name' => 'string|unique:plans,name' . $id,
             'questions_limit' => 'integer'
         ];
     }

@@ -20,6 +20,7 @@ class CreatePlansActivitiesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::table('plans_activities', function (Blueprint $table) {

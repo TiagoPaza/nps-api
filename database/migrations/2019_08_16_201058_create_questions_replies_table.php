@@ -16,10 +16,11 @@ class CreateQuestionsRepliesTable extends Migration
         Schema::create('questions_replies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('evaluation');
-            $table->string('response_optional');
+            $table->string('response_optional')->nullable();
             $table->bigInteger('question_id')->unsigned();
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::table('questions_replies', function (Blueprint $table) {

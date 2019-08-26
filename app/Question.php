@@ -31,7 +31,8 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-        'ask', 'ask_optional'
+        'ask', 'ask_optional', 'user_id',
+        'expire_at'
     ];
 
     protected $dates = [
@@ -48,7 +49,7 @@ class Question extends Model
     ];
 
     /*
-     * Function to relate to model
+     * Function to relate model
      */
     public function user()
     {

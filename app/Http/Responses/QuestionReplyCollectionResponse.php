@@ -14,13 +14,13 @@ use League\Fractal\Serializer\JsonApiSerializer;
 class QuestionReplyCollectionResponse extends Response
 {
     /**
-     * @param QuestionReply[]|\Illuminate\Support\Collection $questionReply
+     * @param QuestionReply[]|\Illuminate\Support\Collection $questionReplies
      * @param LengthAwarePaginator $paginator
      */
-    public function __construct($questionReply, $paginator)
+    public function __construct($questionReplies, $paginator)
     {
         $fractal = (new Manager())->setSerializer(new JsonApiSerializer());
-        $resource = new Collection($questionReply, new QuestionTransformer(), 'question-reply');
+        $resource = new Collection($questionReplies, new QuestionTransformer(), 'question-reply');
         $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
 
         return parent::__construct($fractal->createData($resource)->toArray());

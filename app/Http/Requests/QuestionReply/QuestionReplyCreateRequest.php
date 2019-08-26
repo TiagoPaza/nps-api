@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\PlanActivity;
+namespace App\Http\Requests\QuestionReply;
 
 use App\Http\Requests\JsonRequest;
 
@@ -15,7 +15,8 @@ class QuestionReplyCreateRequest extends JsonRequest
     {
         return [
             'evaluation' => 'required|integer',
-            'response_optional' => 'string'
+            'response_optional' => '',
+            'question_id' => 'required|exists:questions,id'
         ];
     }
 }

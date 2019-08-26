@@ -24,13 +24,18 @@ class QuestionReply extends Model
 {
     use SoftDeletes;
 
+    /*
+     * The name of table
+     */
+    protected $table = 'questions_replies';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'evaluation', 'response_optional'
+        'evaluation', 'response_optional', 'question_id'
     ];
 
     protected $dates = [
@@ -47,7 +52,7 @@ class QuestionReply extends Model
     ];
 
     /*
-     * Function to relate to model
+     * Function to relate model
      */
     public function question()
     {

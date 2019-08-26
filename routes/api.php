@@ -27,6 +27,14 @@ Route::prefix('v1')->group(function () {
             Route::get('user', 'UserController@authenticated');
 
             Route::resource('users', 'UserController');
+            Route::resource('plans', 'PlanController');
+            Route::resource('questions', 'QuestionController');
+            Route::resource('plans-activities', 'PlanActivityController', [
+                'parameters' => ['plans-activities' => 'planActivity']
+            ]);
+            Route::resource('questions-replies', 'QuestionReplyController', [
+                'parameters' => ['questions-replies' => 'questionReply']
+            ]);
         });
     });
 });

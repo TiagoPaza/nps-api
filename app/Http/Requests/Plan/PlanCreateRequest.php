@@ -16,7 +16,7 @@ class PlanCreateRequest extends JsonRequest
         $id = $this->json('id') ? ',' . $this->json('id') : '';
 
         return [
-            'name' => 'required|string|unique:plan' . $id,
+            'name' => 'required|string|unique:plans,name' . $id,
             'questions_limit' => 'required|integer'
         ];
     }

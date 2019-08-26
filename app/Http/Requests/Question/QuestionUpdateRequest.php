@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\PlanActivity;
+namespace App\Http\Requests\Question;
 
 use App\Http\Requests\JsonRequest;
 
@@ -15,8 +15,9 @@ class QuestionUpdateRequest extends JsonRequest
     {
         return [
             'ask' => 'string',
-            'ask_optional' => 'string',
-            'user_id' => 'integer|exists:users,id'
+            'ask_optional' => '',
+            'user_id' => 'integer|exists:users,id',
+            'expire_at' => 'date_format:Y-m-d H:i:s'
         ];
     }
 }
