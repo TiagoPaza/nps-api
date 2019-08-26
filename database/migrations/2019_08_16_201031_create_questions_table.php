@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ask');
-            $table->string('ask_optional');
+            $table->string('ask_optional')->nullable();
             $table->bigInteger('user_id')->unsigned();
 
             $table->dateTime('expire_at');
