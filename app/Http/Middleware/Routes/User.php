@@ -88,6 +88,10 @@ class User
                 return $next($request);
             }
         }
+
+        if ($request->is('api/v1/en/user') || $request->is('api/v1/user')) {
+            return $next($request);
+        }
     }
 
     /**
