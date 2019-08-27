@@ -15,6 +15,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class PlanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('plan');
+    }
+
     /**
      * Display a listing of the resource.
      *

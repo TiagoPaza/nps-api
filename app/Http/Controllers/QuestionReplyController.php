@@ -15,6 +15,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class QuestionReplyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('question-reply');
+    }
+
     /**
      * Display a listing of the resource.
      *

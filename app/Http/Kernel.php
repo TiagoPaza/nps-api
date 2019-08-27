@@ -6,6 +6,11 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckForMaintenanceMode;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\Routes\Plan;
+use App\Http\Middleware\Routes\PlanActivity;
+use App\Http\Middleware\Routes\Question;
+use App\Http\Middleware\Routes\QuestionReply;
+use App\Http\Middleware\Routes\User;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -93,6 +98,12 @@ class Kernel extends HttpKernel
         'localizationRedirect' => LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect' => LocaleSessionRedirect::class,
 //        'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
+
+        'plan' => Plan::class,
+        'user' => User::class,
+        'question' => Question::class,
+        'plan-activity' => PlanActivity::class,
+        'question-reply' => QuestionReply::class,
     ];
 
     /**
