@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class Question
+class QuestionReply
 {
     /*
      * Title of error
