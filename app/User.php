@@ -50,6 +50,7 @@ class User extends Authenticatable implements JWTSubject
         'state', 'city', 'country'
     ];
 
+    protected $guard_name = 'api';
     /**
      * The attributes that should be hidden for arrays.
      *
