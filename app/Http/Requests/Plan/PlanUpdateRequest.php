@@ -13,10 +13,10 @@ class PlanUpdateRequest extends JsonRequest
      */
     public function rules()
     {
-        $id = $this->request->get('id') ? ',' . $this->request->get('id') : '';
+        $plan = $this->route('plan');
 
         return [
-            'name' => 'string|unique:plans,name' . $id,
+            'name' => 'string|unique:plans,name' . $plan->id,
             'questions_limit' => 'integer'
         ];
     }

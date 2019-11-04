@@ -25,7 +25,7 @@ class PlanActivityObserver
      */
     public function created(PlanActivity $planActivity)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 
     /**
@@ -36,7 +36,7 @@ class PlanActivityObserver
      */
     public function updated(PlanActivity $planActivity)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 
     /**
@@ -47,6 +47,6 @@ class PlanActivityObserver
      */
     public function deleted(PlanActivity $planActivity)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 }

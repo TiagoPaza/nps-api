@@ -25,7 +25,7 @@ class QuestionReplyObserver
      */
     public function created(QuestionReply $questionReply)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 
     /**
@@ -36,7 +36,7 @@ class QuestionReplyObserver
      */
     public function updated(QuestionReply $questionReply)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 
     /**
@@ -47,6 +47,6 @@ class QuestionReplyObserver
      */
     public function deleted(QuestionReply $questionReply)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 }

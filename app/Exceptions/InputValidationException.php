@@ -3,19 +3,41 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class InputValidationException extends Exception
 {
+    /**
+     * @var int
+     */
     protected $code = 400;
+
+    /**
+     * @var string
+     */
     protected $title;
+
+    /**
+     * @var array
+     */
     protected $errors;
 
+    /**
+     * InputValidationException constructor.
+     * @param array $errors
+     */
     public function __construct(array $errors)
     {
         $this->errors = $errors;
+        $this->render();
+
+        return parent::__construct();
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function render()
     {
         $errors = array_map(function ($attribute, $violation) {

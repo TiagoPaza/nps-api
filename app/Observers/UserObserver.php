@@ -25,7 +25,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 
     /**
@@ -36,7 +36,7 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 
     /**
@@ -47,6 +47,6 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        $this->cache->flush();
+        $this->cache->clear();
     }
 }

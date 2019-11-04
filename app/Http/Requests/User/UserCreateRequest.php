@@ -13,15 +13,13 @@ class UserCreateRequest extends JsonRequest
      */
     public function rules()
     {
-        $id = $this->json('id') ? ',' . $this->json('id') : '';
-
         return [
             'social_reason' => 'required|string|min:3|max:191',
             'fantasy_name' => 'required|string|min:3|max:191',
             'document_type' => 'required|string|min:3|max:191',
-            'document' => 'required|string|min:3|max:191|unique:users,document' . $id,
+            'document' => 'required|string|min:3|max:191|unique:users,document',
             'state_registration' => 'required|string|min:3|max:191',
-            'email' => 'required|email|min:3|max:191|unique:users,email' . $id,
+            'email' => 'required|email|min:3|max:191|unique:users,email',
             'phone' => 'required|string|min:3|max:191',
             'cep' => 'required|string|min:8',
             'address' => 'required|string|max:191',
